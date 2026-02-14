@@ -1,0 +1,71 @@
+/*
+=================================
+DDL Script : Create Bronze Table
+=================================
+
+Script Purpose
+
+This script create tables in the 'bronze' schema, dropping existing tables if they already exist.
+Run this script to re-define the DDL structure of 'bronze' tables.
+
+=================================
+
+USE [Banking Transactions];
+GO
+
+-- Drop table if exists
+IF OBJECT_ID('bronze.Banking_Transactions', 'U') IS NOT NULL
+BEGIN
+    DROP TABLE bronze.Banking_Transactions;
+END
+GO
+
+-- Create Bronze Table
+CREATE TABLE bronze.transactions_data (
+    transaction_id INT PRIMARY KEY,
+    client_id INT ,
+    card_id INT ,
+    transaction_date DATE,
+    merchant_id INT,
+    merchant_city VARCHAR(50),
+    merchant_state VARCHAR(50),
+    amount FLOAT,
+    use_chip VARCHAR(10),
+    zip INT,
+    mcc INT,
+    errors VARCHAR(50)
+);
+
+CREATE TABLE bronze.users_data (
+    user_id INT PRIMARY KEY,
+    current_age INT ,
+    retirement_age INT ,
+    birth_year INT,
+    birth_month INT,
+    gender VARCHAR(50),
+    address VARCHAR(50),
+    latitude FLOAT,
+    longitude FLOAT,
+    per_capita_income INT,
+    yearly_income INT,
+    total_dept INT,
+    credit_score INT,
+    num_credit_cards INT
+);
+
+CREATE TABLE bronze.cards_data (
+    card_id INT PRIMARY KEY,
+    client_id INT ,
+    card_type VARCHAR(50),
+    card_brand VARCHAR(50),
+    card_number INT,
+    expires DATE,
+    cvv INT,
+    has_chip VARCHAR(50),
+    num_cards_issued INT,
+    credit_limit INT,
+    acct_open_date DATE,
+    year_bin_last_changed INT,
+    card_on_dark_web VARCHAR(50),
+    
+);
